@@ -23,8 +23,9 @@
                 <ColumnDefinition Width="56*"></ColumnDefinition>
                 <ColumnDefinition Width="141*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <xctk:DateTimePicker x:Name="startTime" Grid.Column="1" Margin="10,10,10,10" Format="RFC1123" ValueChanged="dtStartTime"/>
-            <xctk:DateTimePicker x:Name="stopTime" Grid.Row="1" Grid.Column="1" Margin="10,10,10,10" Format="RFC1123" ValueChanged="dtStopTime"/>
+            
+            <xctk:DateTimePicker x:Name="cbStartTime" Grid.Column="1" Margin="50,10,50,10" Format="Custom" ValueChanged="DtStartTime" FormatString="yyyy-MM-dd hh:MM:ss"/>
+            <xctk:DateTimePicker x:Name="cbStopTime" Grid.Row="1" Grid.Column="1" Margin="50,10,50,10" Format="Custom" ValueChanged="DtStopTime" FormatString="yyyy-MM-dd hh:MM:ss"/>
             <TextBlock HorizontalAlignment="Center"  TextWrapping="Wrap" Text="开始时间：" VerticalAlignment="Center" FontSize="15" FontWeight="Heavy" Height="20" Margin="25,12,11,12" Width="76"/>
             <TextBlock Grid.Row="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="停止时间：" VerticalAlignment="Center" FontSize="15" FontWeight="Heavy" Height="20" Margin="25,12,11,12" Width="76"/>
             <TextBlock Grid.Row="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="预测部件：" VerticalAlignment="Center" FontSize="15" FontWeight="Heavy" Height="20" Margin="25,12,11,12" Width="76"/>

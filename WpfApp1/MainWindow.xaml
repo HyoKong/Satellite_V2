@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"  
         mc:Ignorable="d"
         Title="Satellite" Height="600" Width="1024"
         WindowStartupLocation="CenterScreen"
@@ -25,7 +26,8 @@
                             <ImageBrush Stretch="Fill" ImageSource="D:\Satellite\Satellite_V2\Satellite_V2\background.jpg"/>
                         </Canvas.Background>
                     </Canvas>
-                    <Button x:Name="variablePredict" Content="变量预测" Background="Gray" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="80" Height="35" FontWeight="Bold" FontStyle="Italic" Click="VariablePredict_Click" Margin="397,138,0,0"/>
+                    <Button x:Name="variablePredict" Content="变量预测" Background="Gray" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="100" Height="35" FontWeight="Bold" FontStyle="Italic" Click="VariablePredict_Click" Margin="397,138,0,0"/>
+                    <Button x:Name="realTime" Content="实时故障显示" Background="Gray" FontSize="15" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="100" Height="35" FontWeight="Bold" FontStyle="Italic" Click="VariablePredict_Click" Margin="397,84,0,0"/>
                 </Grid>
             </Viewbox>
         </DockPanel>

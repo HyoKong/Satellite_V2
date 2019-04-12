@@ -42,8 +42,9 @@ namespace WpfApp1
         {
             { "动量轮", new string[] { "动量轮1马达电流", "动量轮2马达电流", "动量轮4马达电流", "动量轮5马达电流", "动量轮1轴温","动量轮2轴温",
                                         "动量轮3轴温","动量轮4轴温","动量轮5轴温","动量轮6轴温",} },
-            { "电源", new string[] { "1", "2", "3", "4" } },
-            { "探测仪", new string[] { "1", "2", "3" } },
+            { "电源", new string[] { "28V负载电压", "28V母线电压", "42V负载电压", "42V母线电压", "A组电池电压1", "B组电池电压1" } },
+            { "辐射计", new string[] { "辐射计东西总电流", "辐射计南北总电流" } },
+            { "探测仪", new string[] { "探测仪东西电机A相电流", "探测仪东西电机B相电流", "探测仪东西电机总电流", "探测仪南北电机A相电流", "探测仪南北电机B相电流", "探测仪南北电机总电流" } },
         };
 
         public VariableTimeSelectWindow()
@@ -61,6 +62,7 @@ namespace WpfApp1
                 ComboBoxItem boxItem = new ComboBoxItem() { Content = kvp.Key };
                 coll.Add(boxItem);
             }
+
 
             // 初始化时分列表
             //ArrayList hourArrayList = new ArrayList();
@@ -136,8 +138,11 @@ namespace WpfApp1
             if ( this.part != null && this.variable != null && this.startTimeFlag)
             {
                 //MessageBox.Show(this.startDate+this.startHour+this.variable);
-
-                PredictVariableWindow predictVariableWindow = new PredictVariableWindow();
+                string variable = cbVariable.Text;
+                string part = cbPart.Text;
+                string startTime = cbStartTime.Text;
+                string stopTime = cbStopTime.Text;
+                PredictVariableWindow predictVariableWindow = new PredictVariableWindow(part:part,variable:variable,startTime:startTime,stopTime:stopTime);
                 bool? b = predictVariableWindow.ShowDialog();
                 //if (b == true)
                 //{
@@ -166,14 +171,14 @@ namespace WpfApp1
         // 获取选择的时间
         private void CbSelection_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            bool startHourFlag = true;
-            bool startMinuteFlag = true;
-            bool stopHourFlag = true;
-            bool stopMinuteFlag = true;
+            //bool startHourFlag = true;
+            //bool startMinuteFlag = true;
+            //bool stopHourFlag = true;
+            //bool stopMinuteFlag = true;
             bool partFlag = true;
             bool variableFlag = true;
-            bool startDateFlag = true;
-            bool stopDateFlag = true;
+            //bool startDateFlag = true;
+            //bool stopDateFlag = true;
 
             string startHour = null;
             string startMinute = null;
@@ -249,12 +254,12 @@ namespace WpfApp1
         }
 
         // 判断是否选择了起止日期,并更改标志位
-        private void dtStartTime(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void DtStartTime(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             this.startTimeFlag = true;
         }
 
-        private void dtStopTime(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void DtStopTime(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             this.stopTimeFlag = true;
         }

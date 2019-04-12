@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections;
 using System.Data;
+using System.Threading;
 //using Microsoft.Research.DynamicDataDisplay;
 using InteractiveDataDisplay.WPF;
 
@@ -26,22 +27,35 @@ namespace WpfApp1
     /// </summary>
     public partial class PredictVariableWindow : Window
     {
-        public string[] items { get; set; }
+        public string part { get; set; }
+        public string variable { get; set; }
+        public string startTime { get; set; }
+        public string stopTime { get; set; }
+        public string items { get; set; }
 
         //存储读取txt文件的变量
-        //public string[] dll_file = getFileName("./读取多个文件实验/动量轮");
-        //public string[] fsj_file = getFileName("./读取多个文件实验/辐射计");
-        //public string[] tcy_file = getFileName("./读取多个文件实验/探测仪");
-        //public string[] dy_file = getFileName("./读取多个文件实验/电源");
+        public string[] dll_file = getFileName("./读取多个文件实验/动量轮");
+        public string[] fsj_file = getFileName("./读取多个文件实验/辐射计");
+        public string[] tcy_file = getFileName("./读取多个文件实验/探测仪");
+        public string[] dy_file = getFileName("./读取多个文件实验/电源");
 
         private int read_first_num = 100;//读取txt文件最先开始读的行数
-        public PredictVariableWindow()
+        public PredictVariableWindow(string part,string variable,string startTime,string stopTime)
         {
             InitializeComponent();
+            //"电源"
+            this.part = part;
+            //"28V负载电压"
+            this.variable = variable;
+            //"2019-04-03 12:04:00"
+            this.startTime = startTime;
+            //"2019-04-03 12:04:00"
+            this.stopTime = stopTime;
+
             //this.items = info;
             //DataLoaded();
 
-            double[] x = new double[20000];
+            double[] x = new double[2000];
             for (int i = 0; i < x.Length; i++)
                 //x[i] = 3.1415 * i / (x.Length - 1);
                 x[i] = i/100.0*Math.PI;
@@ -78,10 +92,10 @@ namespace WpfApp1
 
             // 新建DataTable列表
             DataTable dt = new DataTable("Variable");
-            foreach (string item in this.items)
-            {
-                dt.Columns.Add(item);
-            }
+            //foreach (string item in this.items)
+            //{
+            //    dt.Columns.Add(item);
+            //}
 
             while (strLine != null)
             {
@@ -126,13 +140,25 @@ namespace WpfApp1
             }
         }
 
+        #region 读取文件夹下所有txt文件
+        //按照文件创建时间排序
+        public static void SortAsFileCreationTime(ref FileInfo[] arrFi)
+        {
+            Array.Sort(arrFi, delegate (FileInfo x, FileInfo y)
+            {
+                return x.LastWriteTime.CompareTo(y.LastWriteTime);
+            }
+            );
+        }
+
         //读取指定路径下所有文件名
         public static string[] getFileName(string path)
         {
             DirectoryInfo root = new DirectoryInfo(path);
-            FileSystemInfo[] fsinfos = root.GetFileSystemInfos();
+            FileInfo[] fsinfos = root.GetFiles("*.*");
             //string[] txt_name_list = new string[]{};
             List<string> strList = new List<string>();
+            SortAsFileCreationTime(ref fsinfos);
             foreach (FileSystemInfo fsinfo in fsinfos)
             {
 
@@ -149,6 +175,20 @@ namespace WpfApp1
             string[] strArray = strList.ToArray();
             return strArray;
         }
+        #endregion
+
+        #region 时间戳转换成时间
+        //时间戳转换成时间
+        private DateTime TimeStampToDateTime(string TimeStamp_l)
+        {
+            DateTime otime = new DateTime();
+            string t1 = DateTime.UtcNow.ToString("2000-01-01 12:00:00");
+            DateTime utc1 = DateTime.Parse(t1).AddTicks(long.Parse(TimeStamp_l) * 10);
+            DateTime local1 = utc1.ToLocalTime();//转成本地时间
+            otime = local1;
+            return otime;
+        }
+        #endregion
 
     }
 
