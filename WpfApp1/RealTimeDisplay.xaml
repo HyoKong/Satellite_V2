@@ -16,8 +16,8 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Column="0" Grid.Row="3">
+
+        <StackPanel Grid.Column="0" Grid.Row="0">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="CPU Usage" Margin="20,10,0,0"
                        FontSize="15" FontWeight="Bold"/>
@@ -26,7 +26,7 @@
                 <Button x:Name="ifDynamic"  Content="滚屏or不滚屏" Click="IfDynamic_Click" />
             </StackPanel>
 
-            <d3:ChartPlotter x:Name="plotter" Margin="100,100,100,50" Grid.Row="1" VerticalAlignment="Center" Background="Transparent" Foreground="#FF00DBE7">
+            <d3:ChartPlotter x:Name="dllPlotter" Margin="100,100,100,50" Grid.Row="1" VerticalAlignment="Center" Background="Transparent" Foreground="#FF00DBE7">
                 <d3:ChartPlotter.VerticalAxis>
                     <d3:VerticalIntegerAxis Foreground="#FF00DBE7"/>
                 </d3:ChartPlotter.VerticalAxis>
@@ -49,7 +49,30 @@
                 <Button x:Name="ifDynamic1"  Content="滚屏or不滚屏" Click="IfDynamic_Click" />
             </StackPanel>
 
-            <d3:ChartPlotter x:Name="plotter1" Margin="5,5,10,5" Grid.Row="1">
+            <d3:ChartPlotter x:Name="dyPlotter" Margin="100,100,100,50" Grid.Row="1" VerticalAlignment="Center" Background="Transparent" Foreground="#FF00DBE7">
+                <d3:ChartPlotter.VerticalAxis>
+                    <d3:VerticalIntegerAxis Foreground="#FF00DBE7"/>
+                </d3:ChartPlotter.VerticalAxis>
+
+                <d3:ChartPlotter.HorizontalAxis>
+                    <d3:HorizontalIntegerAxis  Foreground="#FF00DBE7"/>
+                </d3:ChartPlotter.HorizontalAxis>
+
+                <d3:Header Content="CPU Performance History" Foreground="#FF00DBE7"/>
+                <d3:VerticalAxisTitle Content="Percentage"/>
+            </d3:ChartPlotter>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="CPU Usage" Margin="20,10,0,0"
+                       FontSize="15" FontWeight="Bold"/>
+                <TextBlock x:Name="cpuUsageText2" Margin="10,10,0,0"
+                       FontSize="15"/>
+                <Button x:Name="ifDynamic2"  Content="滚屏or不滚屏" Click="IfDynamic_Click" />
+            </StackPanel>
+
+            <d3:ChartPlotter x:Name="fsjPlotter" Margin="5,5,10,5" Grid.Row="1">
                 <d3:ChartPlotter.VerticalAxis>
                     <d3:VerticalIntegerAxis />
                 </d3:ChartPlotter.VerticalAxis>
@@ -63,6 +86,28 @@
             </d3:ChartPlotter>
         </StackPanel>
 
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="CPU Usage" Margin="20,10,0,0"
+                       FontSize="15" FontWeight="Bold"/>
+                <TextBlock x:Name="cpuUsageText3" Margin="10,10,0,0"
+                       FontSize="15"/>
+                <Button x:Name="ifDynamic3"  Content="滚屏or不滚屏" Click="IfDynamic_Click" />
+            </StackPanel>
+
+            <d3:ChartPlotter x:Name="tcyPlotter" Margin="5,5,10,5" Grid.Row="1">
+                <d3:ChartPlotter.VerticalAxis>
+                    <d3:VerticalIntegerAxis />
+                </d3:ChartPlotter.VerticalAxis>
+
+                <d3:ChartPlotter.HorizontalAxis>
+                    <d3:HorizontalIntegerAxis />
+                </d3:ChartPlotter.HorizontalAxis>
+
+                <d3:Header Content="CPU Performance History"/>
+                <d3:VerticalAxisTitle Content="Percentage"/>
+            </d3:ChartPlotter>
+        </StackPanel>
 
     </Grid>
 </Window>
